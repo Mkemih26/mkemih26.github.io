@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUTS de Olivia Rodrigo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #8c38ac; /* Teinte de violet pour un fond plus doux */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 20px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #4d005f; /* Violet foncé pour contraster avec le fond */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Ombre pour un effet de carte */
+        }
+
+        h1, h2 {
+            color: #ffffff;
+            margin: 10px 0;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 1em;
+            color: #ffffff;
+            margin: 20px 0;
+            text-align: justify;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 2px solid #b547e0; /* Bordure violette pour les images */
+        }
+
+        .album-cover {
+            width: 50%;
+            max-width: 500px;
+            border: 2px solid #b547e0;
+        }
+
+        ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+            text-align: left;
+            margin: 20px auto;
+            color: #ffffff;
+        }
+
+        ol li {
+            font-size: 1em;
+            line-height: 1.8;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #cbcfd4;
+        }
+
+        .custom-audio-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .custom-audio-player button {
+            background-color: #b547e0;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .custom-audio-player button:hover {
+            background-color: #a03dbf;
+        }
+
+        .custom-audio-player input[type="range"] {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ALBUM : "GUTS"</h1>
+        <h2>de Olivia Rodrigo</h2>
+        
+        <div class="centered">
+            <img src="c:\Users\Elève\Downloads\imageeee\oliviaaaa.jpg" alt="Olivia Rodrigo" title="Olivia Rodrigo"/>
+        </div>    
+
+        <p>
+            Olivia Rodrigo, 20 ans, actrice, chanteuse, auteure-compositrice, maintes fois récompensée et ayant brisé de nombreux records est enfin de retour ! Elle annonce la sortie de son nouvel album « GUTS » produit par Daniel Nigro à qui l’on doit notamment la production de son premier opus SOUR.
+        </p>
+
+        <div class="centered">
+            <img src="c:\Users\Elève\Downloads\imageeee\guts.jpg" alt="GUTS Album Cover" title="GUTS Album Cover" class="album-cover"/>
+        </div>
+
+        <h1>Tracklist</h1>
+        <ol>
+            <li>all-american bitch</li>
+            <li>big idea right?</li>
+            <li>vampire</li>
+            <li>lacy</li>
+            <li>ballad of a homeschooled girl</li>
+            <li>making the bed</li>
+            <li>logical</li>
+            <li>get him back!</li>
+            <li>love is embarrassing</li>
+            <li>the grudge</li>
+            <li>pretty isn't pretty</li>
+            <li>teenage dream</li>
+        </ol>
+
+        <h2>Voici mon morceau préféré de l'album :</h2>
+        <div class="custom-audio-player">
+            <button id="play-pause">Play</button>
+            <input type="range" id="seek-bar" value="0">
+            <span id="current-time">00:00</span> / <span id="duration">00:00</span>
+        </div>
+        <audio id="audio">
+            <source src="c:\Users\Elève\Music\logical de Olivia Rodrigo.mp3" type="audio/mp3">
+            Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+
+        <a href="https://open.spotify.com/album/1xJHno7SmdVtZAtXbdbDZp">
+            Tout l'album est directement sur Spotify   
+        </a>
+    </div>
+    
+    <script>
+        const audio = document.getElementById("audio");
+        const playPauseButton = document.getElementById("play-pause");
+        const seekBar = document.getElementById("seek-bar");
+        const currentTimeDisplay = document.getElementById("current-time");
+        const durationDisplay = document.getElementById("duration");
+
+        playPauseButton.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.textContent = "Pause";
+            } else {
+                audio.pause();
+                playPauseButton.textContent = "Play";
+            }
+        });
+
+        audio.addEventListener("timeupdate", () => {
+            const currentTime = audio.currentTime;
+            const duration = audio.duration;
+            seekBar.value = (currentTime / duration) * 100;
+            currentTimeDisplay.textContent = formatTime(currentTime);
+            durationDisplay.textContent = formatTime(duration);
+        });
+
+        seekBar.addEventListener("input", () => {
+            const seekTo = (seekBar.value / 100) * audio.duration;
+            audio.currentTime = seekTo;
+        });
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        }
+
+        audio.addEventListener("loadedmetadata", () => {
+            durationDisplay.textContent = formatTime(audio.duration);
+        });
+    </script>
+</body>
+</html>
+

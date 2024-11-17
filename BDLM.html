@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>"BDLM" de TIAKOLA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #673f1f;
+            color: #674626;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 20px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #e8c29f;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1, h2 {
+            color: #895a2d;
+            margin: 10px 0;
+        }
+
+        p, ol, a {
+            color: #674626;
+        }
+
+        p img, .album-cover {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 2px solid #705522;
+        }
+
+        ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+            text-align: left;
+            margin: 20px auto;
+            color: #674626;
+        }
+
+        ol li {
+            font-size: 1em;
+            line-height: 1.8;
+        }
+
+        a {
+            color: #895a2d;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #895a2d;
+        }
+
+        /* Custom Audio Player Styles */
+        .custom-audio-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 20px auto;
+        }
+
+        #play-pause {
+            background-color: #895a2d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #seek-bar {
+            flex-grow: 1;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        #current-time, #duration {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ALBUM : "BDLM VOL.1"</h1>
+        <h2>de Tiakola</h2>
+
+        <p>
+            <img src="c:\Users\Elève\Downloads\imageeee\tiakola.jpg" alt="tiakola" title="TIAKOLAMELO"/>
+        </p>    
+
+        <p>
+            Tiakola, de son vrai nom William Mundala, né le 4 décembre 1999 à Bondy en Seine-Saint-Denis, est un rappeur et chanteur français. C'est un ancien membre du groupe 4Keus avant que ce dernier soit mis de côté pour pouvoir lancer sa propre carrière.<br>
+            Bienvenue dans le Meloworld, un univers où la créativité et le talent se rencontrent pour vous offrir une expérience musicale unique, rythmée par des mélodies envoûtantes qui sauront toucher le cœur des auditeurs.
+            Tiakola présente le fruit d'un projet collaboratif exceptionnel avec des artistes en développement tels que Merveille, Ooskow, Ryflo, Prototype, RNBOI et d'autres artistes de renom.<br>
+        </p>
+
+        <p>
+            <img src="c:\Users\Elève\Downloads\imageeee\bdlm.jpg" alt="tiakola" title="TIAKOLAMELO" class="album-cover"/>
+        </p>
+
+        <h1>Tracklist</h1>
+        <ol>
+            <li>T.I.A</li>
+            <li>PONA NINI (feat. Genezio, Prototype)</li>
+            <li>G.A.N.G (feat. Niska, La Mano 1.9)</li>
+            <li>CABREL (feat. Saaro)</li>
+            <li>PROTECT (feat. Merveille)</li>
+            <li>PSYCHOLOGIQUE</li>
+            <li>PLAISIR NOCIF (feat. SDM, Liims)</li>
+            <li>PING PONG</li>
+            <li>MANON B (feat. Ryflo, Oskoow)</li>
+            <li>FORMIDABLE</li>
+            <li>FAST LIFE & FAMILLE (feat. .H.K, Jolagreen23)</li>
+            <li>RESTE-LA (feat. RnBoi, Monsieur Nov)</li>
+            <li>Y.J (C'EST K.O) (feat. Ronisia)</li>
+            <li>1h55 (feat. Rsko, Hamza)</li>
+            <li>GRAND PRIX (feat. JEY BROWNIE, Sonny Rave)</li>
+            <li>DERNIERE DANSE (feat. Zed, Cheu B)</li>
+            <li>MANON B (feat. Ryflo, Oskoow & MC Cebezinho) - Brazilian Remix</li>    
+        </ol>
+
+        <h2>Écoutez mon morceau préféré de l'album :</h2>
+        <div class="custom-audio-player">
+            <button id="play-pause">Play</button>
+            <input type="range" id="seek-bar" value="0">
+            <span id="current-time">00:00</span> / <span id="duration">00:00</span>
+        </div>
+        <audio id="audio">
+            <source src="c:\Users\Elève\Music\PROTECT.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+
+        <a href="https://open.spotify.com/album/7bwHY8zkw9nqxxw1WIQ7Qa">
+            Tout l'album est directement sur Spotify   
+        </a>
+    </div> 
+
+    <script>
+        const audio = document.getElementById("audio");
+        const playPauseButton = document.getElementById("play-pause");
+        const seekBar = document.getElementById("seek-bar");
+        const currentTimeDisplay = document.getElementById("current-time");
+        const durationDisplay = document.getElementById("duration");
+
+        // Toggle play/pause
+        playPauseButton.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.textContent = "Pause";
+            } else {
+                audio.pause();
+                playPauseButton.textContent = "Play";
+            }
+        });
+
+        // Update progress bar and time display
+        audio.addEventListener("timeupdate", () => {
+            const currentTime = audio.currentTime;
+            const duration = audio.duration;
+            seekBar.value = (currentTime / duration) * 100;
+            currentTimeDisplay.textContent = formatTime(currentTime);
+            durationDisplay.textContent = formatTime(duration);
+        });
+
+        // Seek bar change
+        seekBar.addEventListener("input", () => {
+            const seekTo = (seekBar.value / 100) * audio.duration;
+            audio.currentTime = seekTo;
+        });
+
+        // Format time to MM:SS
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        }
+
+        // Set duration display once metadata is loaded
+        audio.addEventListener("loadedmetadata", () => {
+            durationDisplay.textContent = formatTime(audio.duration);
+        });
+    </script>
+</body>
+</html>

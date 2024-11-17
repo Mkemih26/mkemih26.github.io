@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Exit de Luther</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a0d99; /* Teinte de bleu foncé */
+            color: #ff66ff; /* Fuchsia vif pour le texte */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 20px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #2508b0; /* Légèrement plus clair pour l'arrière-plan */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        h1, h2 {
+            color: #ff66ff; /* Accent en fuchsia */
+            margin: 10px 0;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 1em;
+            color: #ff66ff;
+            margin: 20px 0;
+            text-align: justify;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 2px solid #ff66ff; /* Bordure fuchsia pour les images */
+        }
+
+        .album-cover {
+            width: 50%;
+            max-width: 500px;
+            border: 2px solid #ff66ff;
+        }
+
+        ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+            text-align: left;
+            margin: 20px auto;
+        }
+
+        ol li {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #ff66ff;
+        }
+
+        a {
+            color: #ff66ff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #ff33ff;
+        }
+
+        .custom-audio-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .custom-audio-player button {
+            background-color: #ff66ff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .custom-audio-player button:hover {
+            background-color: #ff33ff;
+        }
+
+        .custom-audio-player input[type="range"] {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ALBUM : Exit</h1>
+        <h2>de LUTHER</h2>
+
+        <div class="centered">
+            <img src="c:\Users\Elève\Downloads\imageeee\luther.jpg" alt="Luther" title="Luther"/>
+        </div>
+
+        <p>
+            "EXIT", condensé des ressentis émotionnels et explorations artistiques d’un adolescent devenu adulte. Dans son nouveau projet, Luther s'affranchit progressivement des codes du rap pour tendre vers des sonorités plus pop et électroniques.
+        </p>
+
+        <div class="centered">
+            <img src="c:\Users\Elève\Downloads\imageeee\exit.jpg" alt="Exit" title="Exit" class="album-cover"/>
+        </div>
+
+        <h1>Tracklist</h1>
+        <ol>
+            <li>PABO</li>
+            <li>ROUGE GORON</li>
+            <li>MOSSY COBBLESTONE</li>
+            <li>T3</li>
+            <li>JOURNAL DE QUÊTES</li>
+            <li>SEUIL</li>
+            <li>uSQUAD</li>
+            <li>CHÂTEAU FORT</li>
+            <li>LOOK</li>
+            <li>ALED</li>
+        </ol>
+
+        <h2>Écouter le meilleur son de l'album (pour moi) :</h2>
+        <div class="custom-audio-player">
+            <button id="play-pause">Play</button>
+            <input type="range" id="seek-bar" value="0">
+            <span id="current-time">00:00</span> / <span id="duration">00:00</span>
+        </div>
+        <audio id="audio">
+            <source src="c:\Users\Elève\Music\Luther - CHATEAU FÔRT.mp3" type="audio/mp3">
+            Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+
+        <a href="https://open.spotify.com/intl-fr/album/0njxuaC5wUd53QqRLKGKB7?si=iyK6QH8ATQSWVKLSt0gj6w">
+            Tout l'album est directement sur Spotify   
+        </a>
+    </div>
+    
+    <script>
+        const audio = document.getElementById("audio");
+        const playPauseButton = document.getElementById("play-pause");
+        const seekBar = document.getElementById("seek-bar");
+        const currentTimeDisplay = document.getElementById("current-time");
+        const durationDisplay = document.getElementById("duration");
+
+        playPauseButton.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.textContent = "Pause";
+            } else {
+                audio.pause();
+                playPauseButton.textContent = "Play";
+            }
+        });
+
+        audio.addEventListener("timeupdate", () => {
+            const currentTime = audio.currentTime;
+            const duration = audio.duration;
+            seekBar.value = (currentTime / duration) * 100;
+            currentTimeDisplay.textContent = formatTime(currentTime);
+            durationDisplay.textContent = formatTime(duration);
+        });
+
+        seekBar.addEventListener("input", () => {
+            const seekTo = (seekBar.value / 100) * audio.duration;
+            audio.currentTime = seekTo;
+        });
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        }
+
+        audio.addEventListener("loadedmetadata", () => {
+            durationDisplay.textContent = formatTime(audio.duration);
+        });
+    </script>
+</body>
+</html>
